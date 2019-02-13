@@ -6,9 +6,11 @@
 package swing;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -24,29 +26,17 @@ public class test {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        String filePath = "/Users/dam/NetBeansProjects/Swing/src/swing/users.txt";
+        String filePath = "/Users/dam/NetBeansProjects/Swing/src/swing/partituras.txt";
     HashMap<String, String> map = new HashMap<String, String>();
 
     String line;
-    BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    while ((line = reader.readLine()) != null)
-    {
-        String[] parts = line.split(":", 2);
-        if (parts.length >= 2)
-        {
-            String key = parts[0];
-            String value = parts[1];
-            map.put(key, value);
-        } else {
-            System.out.println("ignoring line: " + line);
-        }
-    }
-
-    for (String key : map.keySet())
-    {
-        System.out.println(key + ":" + map.get(key));
-    }
-    reader.close();
+    //BufferedReader reader = new BufferedReader(new FileReader(filePath));
+    String str = "Hello";
+    BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+    writer.write(str);
+     
+    writer.close();
+    //reader.close();
     }
     // Método para imprimir el array de Personas
     /*static void imprimeArrayPersonas(Coche[] array) {

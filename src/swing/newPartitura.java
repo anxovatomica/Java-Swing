@@ -5,8 +5,11 @@
  */
 package swing;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.HashMap;
 import swing.Partitura;
+
 /**
  *
  * @author dam
@@ -203,28 +206,40 @@ public class newPartitura extends javax.swing.JDialog {
     }//GEN-LAST:event_genreActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
-              HashMap<Integer, Object> partituras = new HashMap<>();
-              Integer Id = (Integer) this.id.getValue();
-              String Title = (String) this.title.getText();
-              String Artist = (String) this.artist.getText();
-              String Instrument = (String) this.instrument.getSelectedItem().toString();
-              String Genre = (String) this.genre.getText();
-              String Level = (String) this.level.getSelectedItem().toString();
-              Boolean Printed = (Boolean) this.printed.isSelected();
-              Partitura partitura = new Partitura(Id, Title, Artist, Instrument, Genre, Level, Printed);
-              partituras.put(Id, partitura);
-              /*System.out.println(Id);
+        try{
+            String filePath = "/Users/dam/NetBeansProjects/Swing/src/swing/partituras.txt";
+        HashMap<Integer, Object> partituras = new HashMap<>();
+        Integer Id = (Integer) this.id.getValue();
+        String Title = (String) this.title.getText();
+        String Artist = (String) this.artist.getText();
+        String Instrument = (String) this.instrument.getSelectedItem().toString();
+        String Genre = (String) this.genre.getText();
+        String Level = (String) this.level.getSelectedItem().toString();
+        Boolean Printed = (Boolean) this.printed.isSelected();
+        Partitura partitura = new Partitura(Id, Title, Artist, Instrument, Genre, Level, Printed);
+        partituras.put(Id, partitura);
+        
+
+        String line;
+        //BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String str = "Hello";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        writer.write("Id: " + partitura.getId() + " Title: " +partitura.getTitle());
+
+        writer.close();
+        }catch (Exception e) {
+            System.out.println(e);   
+        }
+        /*System.out.println(Id);
               System.out.println(Title);
               System.out.println(Artist);
               System.out.println(Instrument);
               System.out.println(Genre);
               System.out.println(Level);
               System.out.println(Printed);
-              */
-        
-        
-        
-        
+         */
+
+
     }//GEN-LAST:event_createActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
