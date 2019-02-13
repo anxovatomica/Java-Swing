@@ -22,14 +22,15 @@ de dificultad (alto, medio, bajo) y si está impresa o no*/
     private String instrument;
     private String genre;
     private String level;
-
-    public Partitura(int id, String title, String artist, String instrument, String genre, String level) {
+    private Boolean printed;
+    public Partitura(int id, String title, String artist, String instrument, String genre, String level, Boolean printed) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.instrument = instrument;
         this.genre = genre;
         this.level = level;
+        this.printed = printed;
     }
 
     public int getId() {
@@ -78,6 +79,14 @@ de dificultad (alto, medio, bajo) y si está impresa o no*/
 
     public void setLevel(String level) {
         this.level = level;
+    }
+    
+    public Boolean getPrinted() {
+        return printed;
+    }
+    
+    public void setPrinted(Boolean printed) {
+        this.printed = printed;
     }
     
 }

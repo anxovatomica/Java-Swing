@@ -1,0 +1,3 @@
+a:a
+user1:pass1
+isma:ismapass

@@ -7,7 +7,16 @@ package swing;
 
 import java.awt.Color;
 import java.util.HashMap;
+import swing.User;
 import swing.Menu;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 /**
  *
  * @author dam
@@ -124,6 +133,46 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_passActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+
+        try {
+
+            String filePath = "/Users/dam/NetBeansProjects/Swing/src/swing/users.txt";
+            HashMap<String, String> users = new HashMap<String, String>();
+
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(":", 2);
+                if (parts.length >= 2) {
+                    String key = parts[0];
+                    String value = parts[1];
+                    User usu = new User(key, value);
+                    users.put(usu.getUsername(), usu.getPassword());
+                } else {
+                    System.out.println("ignoring line: " + line);
+                }
+            }
+            /*for (String key : users.keySet()) {
+                System.out.println(key + ":" + users.get(key));
+            }*/
+            if (users.get(user.getText()) == null) {
+                error.setForeground(Color.red);
+                error.setText("CREDENCIALES INCORRECTAS");
+            } else if (users.get(user.getText()).equals(pass.getText())) {
+                //System.out.println("WELCOME");
+                Menu a = new Menu();
+                a.setVisible(true);
+                a.setBounds(0, 0, 500, 450);
+                dispose();
+            }
+            reader.close();
+        } catch (Exception e) {
+            System.out.println(e);   
+        }
+
+        /*
+        ******************LOGIN SIN USAR FICHEROS***********************
+        
         HashMap<String, String> users = new HashMap<>();
         
         User user1 = new User("user1", "pass1");
@@ -141,7 +190,7 @@ public class Login extends javax.swing.JDialog {
             a.setVisible(true);
             a.setBounds(0, 0, 500, 450);
             dispose();
-        }
+        }*/
 
     }//GEN-LAST:event_loginActionPerformed
 

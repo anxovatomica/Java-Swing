@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package swing;
-
+import swing.newPartitura;
 /**
  *
  * @author dam
@@ -27,31 +27,42 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        newPartitura = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("WELCOME!!");
+        newPartitura.setLabel("Nueva Partitura");
+        newPartitura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newPartituraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLabel1)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGap(139, 139, 139)
+                .addComponent(newPartitura)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jLabel1)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addGap(92, 92, 92)
+                .addComponent(newPartitura)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void newPartituraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newPartituraActionPerformed
+        newPartitura a = new newPartitura(this, rootPaneCheckingEnabled);
+        a.setVisible(true);
+        a.setBounds(0, 0, 500, 350);
+    }//GEN-LAST:event_newPartituraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,6 +101,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton newPartitura;
     // End of variables declaration//GEN-END:variables
 }
