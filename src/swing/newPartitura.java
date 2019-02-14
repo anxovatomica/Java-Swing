@@ -5,8 +5,12 @@
  */
 package swing;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import swing.Partitura;
 
@@ -206,29 +210,68 @@ public class newPartitura extends javax.swing.JDialog {
     }//GEN-LAST:event_genreActionPerformed
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
-        try{
+        try {
             String filePath = "/Users/dam/NetBeansProjects/Swing/src/swing/partituras.txt";
-        HashMap<Integer, Object> partituras = new HashMap<>();
-        Integer Id = (Integer) this.id.getValue();
-        String Title = (String) this.title.getText();
-        String Artist = (String) this.artist.getText();
-        String Instrument = (String) this.instrument.getSelectedItem().toString();
-        String Genre = (String) this.genre.getText();
-        String Level = (String) this.level.getSelectedItem().toString();
-        Boolean Printed = (Boolean) this.printed.isSelected();
-        Partitura partitura = new Partitura(Id, Title, Artist, Instrument, Genre, Level, Printed);
-        partituras.put(Id, partitura);
-        
+            HashMap<Integer, Object> partituras = new HashMap<>();
+            Integer Id = (Integer) this.id.getValue();
+            String Title = (String) this.title.getText();
+            String Artist = (String) this.artist.getText();
+            String Instrument = (String) this.instrument.getSelectedItem().toString();
+            String Genre = (String) this.genre.getText();
+            String Level = (String) this.level.getSelectedItem().toString();
+            Boolean Printed = (Boolean) this.printed.isSelected();
+            Partitura partitura = new Partitura(Id, Title, Artist, Instrument, Genre, Level, Printed);
+            partituras.put(Id, partitura);
 
-        String line;
-        //BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        String str = "Hello";
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        writer.write("Id: " + partitura.getId() + " Title: " +partitura.getTitle());
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            Writer fileWriter = new FileWriter("/Users/dam/NetBeansProjects/Swing/src/swing/partituras.txt", true);
+            fileWriter.append("Id: " + partitura.getId()
+                    + " Title: " + partitura.getTitle()
+                    + " Artist: " + partitura.getArtist()
+                    + " Instrument: " + partitura.getInstrument()
+                    + " Genre: " + partitura.getGenre()
+                    + " Level: " + partitura.getLevel()
+                    + " Printed: " + partitura.getPrinted() + "\n");
 
-        writer.close();
-        }catch (Exception e) {
-            System.out.println(e);   
+            fileWriter.close();
+            // BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            /*File a = new File(filePath);
+        FileWriter fileWritter = new FileWriter(a.getName(),true);
+        BufferedWriter bufferWritter = new BufferedWriter(new FileWriter(filePath));
+        bufferWritter.append(Level);
+        bufferWritter.close();
+        fileWritter.close();
+        /*
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                System.out.println("hoal");
+                for (int i = 0; i < parts.length; i++) {
+                    System.out.println(parts[i]);
+                    writer.write("Id: " + partitura.getId() + 
+                " Title: " +partitura.getTitle() + 
+                " Artist: " + partitura.getArtist() + 
+                " Instrument: " + partitura.getInstrument() + 
+                " Genre: " + partitura.getGenre() +
+                " Level: " + partitura.getLevel() +
+                " Printed: " + partitura.getPrinted() + "," + "\n");
+                }
+            }*/
+            // WRITE
+            /*writer.write("Id: " + partitura.getId() + 
+                " Title: " +partitura.getTitle() + 
+                " Artist: " + partitura.getArtist() + 
+                " Instrument: " + partitura.getInstrument() + 
+                " Genre: " + partitura.getGenre() +
+                " Level: " + partitura.getLevel() +
+                " Printed: " + partitura.getPrinted() + ",");
+        writer.flush();*/
+            //writer.close();
+            //reader.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
         /*System.out.println(Id);
               System.out.println(Title);
