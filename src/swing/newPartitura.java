@@ -5,6 +5,7 @@
  */
 package swing;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,6 +13,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.Map;
 import swing.Partitura;
 
 /**
@@ -54,6 +56,7 @@ public class newPartitura extends javax.swing.JDialog {
         level = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         printed = new javax.swing.JToggleButton();
+        msg = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -134,30 +137,35 @@ public class newPartitura extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(genre))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(instrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(70, 70, 70)
+                        .addComponent(printed)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(149, 149, 149)))
+                                    .addComponent(jLabel6)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(level, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(instrument, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(printed)))
+                                .addComponent(jLabel7)
+                                .addGap(149, 149, 149)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(create)
-                .addGap(18, 18, 18)
-                .addComponent(back)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(create)
+                        .addGap(18, 18, 18)
+                        .addComponent(back))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -191,11 +199,13 @@ public class newPartitura extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(printed))
-                .addGap(48, 48, 48)
+                .addGap(29, 29, 29)
+                .addComponent(msg, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(create)
                     .addComponent(back))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -211,8 +221,19 @@ public class newPartitura extends javax.swing.JDialog {
 
     private void createActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createActionPerformed
         try {
+            /*Id: 0 Title:  Artist:  Instrument: Piano Genre:  Level: High Printed: false
+Id: 1 Title:  Artist:  Instrument: Piano Genre:  Level: High Printed: false
+Id: 2 Title:  Artist:  Instrument: Piano Genre:  Level: High Printed: false
+Id: 3 Title:  Artist:  Instrument: Piano Genre:  Level: High Printed: false
+Id: 4 Title:  Artist:  Instrument: Piano Genre:  Level: High Printed: false*/
+            // File Path
             String filePath = "/Users/dam/NetBeansProjects/Swing/src/swing/partituras.txt";
+            // Partituras HashMap --> Int - Obj
             HashMap<Integer, Object> partituras = new HashMap<>();
+            //BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            // FileWrite is used to write on a document, true-->append false-->overwrite
+            Writer fileWriter = new FileWriter(filePath, true);
+            // User Values
             Integer Id = (Integer) this.id.getValue();
             String Title = (String) this.title.getText();
             String Artist = (String) this.artist.getText();
@@ -220,73 +241,65 @@ public class newPartitura extends javax.swing.JDialog {
             String Genre = (String) this.genre.getText();
             String Level = (String) this.level.getSelectedItem().toString();
             Boolean Printed = (Boolean) this.printed.isSelected();
+
+            // Create new Object
             Partitura partitura = new Partitura(Id, Title, Artist, Instrument, Genre, Level, Printed);
-            partituras.put(Id, partitura);
+            //Add it to hashmap
+            partituras.put(partitura.getId(), partitura);
 
             String line;
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            Writer fileWriter = new FileWriter("/Users/dam/NetBeansProjects/Swing/src/swing/partituras.txt", true);
-            fileWriter.append("Id: " + partitura.getId()
-                    + " Title: " + partitura.getTitle()
-                    + " Artist: " + partitura.getArtist()
-                    + " Instrument: " + partitura.getInstrument()
-                    + " Genre: " + partitura.getGenre()
-                    + " Level: " + partitura.getLevel()
-                    + " Printed: " + partitura.getPrinted() + "\n");
+            char a = ' ';
+            String b = partituras.keySet().toString();
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                a = line.charAt(4);
+                System.out.println(Character.getNumericValue(a));
+                System.out.println(Id);
+                
+            }
+            if (Character.getNumericValue(a) == Id/*b.charAt(1)*/) {
+                    msg.setForeground(Color.red);
+                    msg.setText("Id already exist! :(");
+                    System.out.println("ya existe");
+                } else {
+                msg.setForeground(Color.green);
+                msg.setText("Partitura creada satisfactorimente");
+                //Write on document the new "partitura"
+                fileWriter.append("Id: " + partitura.getId()
+                        + " Title: " + partitura.getTitle()
+                        + " Artist: " + partitura.getArtist()
+                        + " Instrument: " + partitura.getInstrument()
+                        + " Genre: " + partitura.getGenre()
+                        + " Level: " + partitura.getLevel()
+                        + " Printed: " + partitura.getPrinted() + "\n");
+            }
+            /*if (a == Id/*b.charAt(1)) {
+                msg.setForeground(Color.red);
+                msg.setText("Id already exist! :(");
+            } else {
+                msg.setForeground(Color.green);
+                msg.setText("Partitura creada satisfactorimente");
+                //Write on document the new "partitura"
+                fileWriter.append("Id: " + partitura.getId()
+                        + " Title: " + partitura.getTitle()
+                        + " Artist: " + partitura.getArtist()
+                        + " Instrument: " + partitura.getInstrument()
+                        + " Genre: " + partitura.getGenre()
+                        + " Level: " + partitura.getLevel()
+                        + " Printed: " + partitura.getPrinted() + "\n");
+            }*/
+            //System.out.println(a);
+            //System.out.println(b.charAt(1));
 
             fileWriter.close();
-            // BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-            /*File a = new File(filePath);
-        FileWriter fileWritter = new FileWriter(a.getName(),true);
-        BufferedWriter bufferWritter = new BufferedWriter(new FileWriter(filePath));
-        bufferWritter.append(Level);
-        bufferWritter.close();
-        fileWritter.close();
-        /*
-            String line;
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                System.out.println("hoal");
-                for (int i = 0; i < parts.length; i++) {
-                    System.out.println(parts[i]);
-                    writer.write("Id: " + partitura.getId() + 
-                " Title: " +partitura.getTitle() + 
-                " Artist: " + partitura.getArtist() + 
-                " Instrument: " + partitura.getInstrument() + 
-                " Genre: " + partitura.getGenre() +
-                " Level: " + partitura.getLevel() +
-                " Printed: " + partitura.getPrinted() + "," + "\n");
-                }
-            }*/
-            // WRITE
-            /*writer.write("Id: " + partitura.getId() + 
-                " Title: " +partitura.getTitle() + 
-                " Artist: " + partitura.getArtist() + 
-                " Instrument: " + partitura.getInstrument() + 
-                " Genre: " + partitura.getGenre() +
-                " Level: " + partitura.getLevel() +
-                " Printed: " + partitura.getPrinted() + ",");
-        writer.flush();*/
-            //writer.close();
-            //reader.close();
         } catch (Exception e) {
             System.out.println(e);
         }
-        /*System.out.println(Id);
-              System.out.println(Title);
-              System.out.println(Artist);
-              System.out.println(Instrument);
-              System.out.println(Genre);
-              System.out.println(Level);
-              System.out.println(Printed);
-         */
-
-
     }//GEN-LAST:event_createActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_backActionPerformed
 
     /**
@@ -347,6 +360,7 @@ public class newPartitura extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox<String> level;
+    private javax.swing.JLabel msg;
     private javax.swing.JToggleButton printed;
     private javax.swing.JTextField title;
     // End of variables declaration//GEN-END:variables
